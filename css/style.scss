@@ -200,6 +200,10 @@ body>main {
 		position: relative;
 		height: fit-content;
 
+		picture {
+			user-select: none;
+		}
+
 		div.text {
 			text-align: center;
 			margin: 30px 0;

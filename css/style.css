@@ -172,6 +172,12 @@ body > main #introduction {
   height: -moz-fit-content;
   height: fit-content;
 }
+body > main #introduction picture {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 body > main #introduction div.text {
   text-align: center;
   margin: 30px 0;
