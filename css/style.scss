@@ -1,0 +1,454 @@
+$mobile-size: 375px;
+$desktop-size: 1440px;
+
+$white: #fff;
+$black: #000;
+$dark-gray: hsl(0, 0%, 55%);
+$very-dark-gray: hsl(0, 0%, 41%);
+
+$font-size: 15px;
+
+$global-desktop-padding-horizontal: 150px;
+
+:root {
+  font-size: $font-size;
+}
+
+body > header {
+  background: url(../images/mobile/image-hero.jpg) no-repeat top center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  padding: 40px 20px;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    div.logo img {
+      width: clamp(125px, 20vw, 200px);
+    }
+
+    ul.nav-links {
+      visibility: hidden;
+      opacity: 0;
+      list-style: none;
+      position: absolute;
+	  top: -145vh;
+      left: 0;
+      transform: translateY(-50%);
+      padding: 0;
+      transition: all 0.5s cubic-bezier(0.77, 0.2, 0.175, 1);
+
+      li a {
+        color: $white;
+        text-decoration: none;
+        font-family: "Josefin Sans";
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 2.2rem;
+		position: relative;
+
+		&::after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: scaleX(0) translate(-50%, 150%);
+			transform-origin:  0% 50%;
+			width: 30px;
+			height: 2px;
+			border-radius: 50px;
+			background-color: white;
+			transition: all .2s ease-in-out;
+		}
+
+		&:hover::after, &:focus::after {
+			transform: scaleX(1) translate(-50%, 150%);
+			outline: transparent;
+			border: none;
+		}
+
+		&:active::after {
+			width: 20px;
+		}
+      }
+    }
+
+    #hamburger {
+      background: url(../images/icon-hamburger.svg) no-repeat center center;
+      width: 25px;
+      height: 25px;
+	  transition: background 0.2s ease-in-out;
+    }
+
+    &::after {
+      position: fixed;
+      top: -100%;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    &::after {
+      content: "";
+      visibility: hidden;
+	  opacity: 0;
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000000;
+      z-index: -1;
+	  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    &.active {
+      ul.nav-links {
+        visibility: visible;
+        opacity: 1;
+		top: 45vh;
+      }
+
+      #hamburger {
+        background-image: url(../images/icon-close.svg);
+      }
+
+      &::after {
+        visibility: visible;
+		opacity: 1;
+		top: 0%;
+      }
+    }
+  }
+
+  div#main-title {
+    margin: 0 auto;
+	width: 90%;
+	max-width: 700px;
+    margin-top: 25vh;
+    border: 2px solid $white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    div {
+      color: white;
+      font-family: "Josefin Sans";
+      font-weight: 300;
+      font-size: 10vw;
+      text-transform: uppercase;
+      line-height: 9.5vw;
+    }
+  }
+
+  @media (min-width: $mobile-size) {
+	background: url(../images/desktop/image-hero.jpg) no-repeat;
+	background-size: cover;
+	padding: 50px clamp(20px, 4vw, $global-desktop-padding-horizontal);
+
+	nav {
+		ul.nav-links {
+			position: static;
+			opacity: 1;
+			visibility: visible;
+			display: flex;
+			gap: clamp(1rem, 5vw, 2rem);
+			transform: none;
+			
+			li a {
+				text-transform: capitalize;
+				font-size: clamp(.8rem, 2vw, 1.25rem);
+			}
+		}
+
+		#hamburger {
+			display: none;
+		}
+	}
+	div#main-title {
+		margin: 0;
+		margin-top: 30vh;
+		display: flex;
+		flex-direction: row;
+		flex-wrap:wrap;
+		column-gap: 1rem;
+
+		div {
+			font-size: clamp(3rem, 5vw, 6rem);
+			line-height: normal;
+			width:min-content;
+		}
+	}
+  }
+}
+
+body>main {
+	padding: 50px 20px;
+
+	@media (min-width: $mobile-size) {
+		padding: clamp(10px, 7vw, $global-desktop-padding-horizontal);
+	}
+
+	#introduction {
+		position: relative;
+		height: fit-content;
+
+		div.text {
+			text-align: center;
+			margin: 30px 0;
+			background-color: $white;
+
+			h2 {
+				font-family: "Josefin Sans";
+				font-weight: 300;
+				text-transform: uppercase;
+				line-height: 1.5rem;
+			}
+
+			p {
+				font-family: Alata;
+				color: $dark-gray;
+				margin-top: 10px;
+				font-size: .9rem;
+			}
+		}
+
+		@media (min-width: $mobile-size) {
+			div.text {
+				position: absolute;
+				width: 50%;
+				padding: 7%;
+				text-align: left;
+				bottom: -50px;
+				right: 0;
+				margin: 0;
+
+				h2 {
+					font-size: clamp(1rem, 3vw, 3rem);
+					line-height: normal;
+				}
+
+				@media (max-width: 500px) {
+					width: 90%;
+				}
+			}
+		}
+	}
+
+	#creations {
+		margin-top: 100px;
+		position: relative;
+
+		h2 {
+			text-transform: uppercase;
+			font-family: 'Josefin Sans';
+			font-weight: 300;
+			font-size: 2rem;
+			margin-bottom: 30px;
+			text-align: center;
+
+			@media (min-width: $mobile-size) {
+				text-align: left;
+			}
+		}
+
+		.card-container {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			gap: 20px;
+			margin-bottom: 40px;
+
+			.card {
+				position: relative;
+				transition: transform 0.2s linear;
+				user-select: none;
+
+				picture img {
+					width: 100%;
+					object-fit: cover;
+					filter: brightness(70%);
+					opacity: 1;
+					transition: opacity 0.2s linear;
+				}
+
+				h3 {
+					width: 60%;
+					font-family: 'Josefin Sans';
+					font-weight: 300;
+					font-size: clamp(.5rem, 8vw, 1.5rem);
+					line-height: clamp(.5rem, 8vw, 1.5rem);
+					text-transform: uppercase;
+					position: absolute;
+					color: white;
+					bottom: 0;
+					padding: clamp(5px, 1vw, 20px);
+					transition: color 0.2s linear;
+					user-select:text;
+				}
+
+				&:hover {
+					picture img {
+						opacity: .4;
+					}
+
+					h3 {
+						color: black;
+					}
+				}
+
+				&:active {
+					transform: scale(95%);
+				}
+			}
+
+			@media (min-width: $mobile-size) {
+				grid-template-columns: repeat(4, 1fr);
+				gap: clamp(.5rem, 2vw, 2rem);
+	
+				.card {
+					position: relative;
+	
+					picture img {
+						width: 100%;
+						object-fit: cover;
+					}
+	
+					h3 {
+						width: 70%;
+						font-size: clamp(.5rem, 2.5vw, 2rem);
+						line-height: clamp(.5rem, 2.5vw, 2rem);
+						position: absolute;
+						color: white;
+						bottom: 0;
+						padding: clamp(5px, 1vw, 20px) clamp(10px, 1vw, 40px);
+					}
+				}
+			}
+		}
+
+		#seeall {
+			margin-left: 50%;
+			width: 40%;
+			transform: translateX(-50%);
+			background-color: transparent;
+			border: 2px solid $very-dark-gray;
+			padding: 7px 0;
+			font-family: 'Alata';
+			text-transform: uppercase;
+			letter-spacing: 5px;
+			transition: all 0.2s linear;
+
+			@media (min-width: $mobile-size) {
+				position: absolute;
+				top: 0;
+				right: 0;
+				transform: none;
+				margin: 0;
+				padding: 7px 20px;
+				width: auto;
+			}
+
+			&:hover {
+				background-color: $black;
+				color: white;
+				border-color: black;
+			}
+
+			&:active {
+				transform: scale(90%);
+			}
+		}
+	}
+}
+
+body>footer {
+	background-color: $black;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	row-gap: 1rem;
+	padding: 60px clamp(10px, 7vw, $global-desktop-padding-horizontal);
+
+	.social {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.5rem;
+		grid-column: 2;
+		grid-row: 1;
+
+		img {
+			width: 20px;
+			object-fit: contain;
+			cursor: pointer;
+		}
+	}
+
+	.quick-nav {
+		display: flex;
+		gap: 1.5rem;
+		padding: 0;
+
+		li {
+			cursor: pointer;
+			color: white;
+			list-style: none;
+			font-family: 'Alata';
+			font-size: clamp(0.5rem, 1.5vw, 1rem);
+			position: relative;
+
+			&::after {
+				content: '';
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: scaleX(0) translate(-50%, 150%);
+				transform-origin:  0% 50%;
+				width: 30px;
+				height: 2px;
+				border-radius: 50px;
+				background-color: white;
+				transition: all .2s ease-in-out;
+			}
+	
+			&:hover::after, &:focus::after {
+				transform: scaleX(1) translate(-50%, 150%);
+				outline: none;
+				border: none;
+			}
+	
+			&:active::after {
+				width: 20px;
+			}
+		}
+	}
+
+	.rights {
+		font-family: 'Alata';
+		color: $dark-gray;
+		text-align: right;
+		font-size: clamp(0.5rem, 1.5vw, 1rem);
+	}
+
+	@media (max-width: $mobile-size) {
+		grid-template-columns: 1fr;
+		padding: 40px;
+		place-items: center;
+		
+		.social {
+			grid-column: 1;
+			grid-row: 2;
+		}
+
+		.quick-nav {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+}
